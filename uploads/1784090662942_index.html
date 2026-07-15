@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew & Bean - Artisan Coffee Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #6b4423 0%, #d4a574 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #fff;
+            color: #6b4423;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(107, 68, 35, 0.95);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4a574;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #6b4423;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: #f9f5f0;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #6b4423;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: #f9f5f0;
+            padding: 5rem 2rem;
+        }
+
+        .menu h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #6b4423;
+        }
+
+        .menu-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .menu-item h3 {
+            color: #6b4423;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .price {
+            color: #d4a574;
+            font-weight: bold;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            color: #6b4423;
+            margin-bottom: 2rem;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #6b4423;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #4a2f1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .features h2, .menu h2, .about h2, .contact h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">☕ Brew & Bean</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>☕ Brew & Bean</h1>
+            <p>Where Every Cup Tells a Story</p>
+            <a href="#menu" class="btn">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Why Choose Us?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3>Ethically Sourced</h3>
+                <p>We partner directly with farmers who practice sustainable agriculture, ensuring fair wages and environmental stewardship.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <h3>Freshly Roasted</h3>
+                <p>Our beans are roasted in small batches daily to bring out the unique flavors and aromas of each origin.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">❤️</div>
+                <h3>Made with Love</h3>
+                <p>Every cup is crafted by our skilled baristas who are passionate about delivering the perfect coffee experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>Espresso <span class="price">$3.50</span></h3>
+                <p>Rich, bold, and perfectly extracted from our signature blend.</p>
+            </div>
+            <div class="menu-item">
+                <h3>Cappuccino <span class="price">$4.50</span></h3>
+                <p>Espresso with steamed milk and a thick layer of creamy foam.</p>
+            </div>
+            <div class="menu-item">
+                <h3>Latte <span class="price">$4.75</span></h3>
+                <p>Smooth espresso with velvety steamed milk, topped with latte art.</p>
+            </div>
+            <div class="menu-item">
+                <h3>Cold Brew <span class="price">$5.00</span></h3>
+                <p>Steeped for 24 hours for a smooth, naturally sweet flavor.</p>
+            </div>
+            <div class="menu-item">
+                <h3>Matcha Latte <span class="price">$5.25</span></h3>
+                <p>Premium Japanese matcha whisked with your choice of milk.</p>
+            </div>
+            <div class="menu-item">
+                <h3>Pastry Selection <span class="price">$3.00+</span></h3>
+                <p>Freshly baked croissants, muffins, and artisan breads daily.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2>Our Story</h2>
+        <p>Founded in 2020, Brew & Bean started with a simple mission: to serve exceptional coffee in a warm, welcoming environment.</p>
+        <p>Our journey began with a trip through the coffee regions of Colombia, Ethiopia, and Japan, where we learned about the art and science of coffee production.</p>
+        <p>Today, we continue to explore new flavors and techniques, bringing the world's best coffees to your cup.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Visit Us</h2>
+        <div class="contact-info">
+            <div class="contact-item">📍 123 Coffee Lane, Downtown</div>
+            <div class="contact-item">📞 (555) 123-4567</div>
+            <div class="contact-item">✉️ hello@brewandbean.com</div>
+            <div class="contact-item">🕐 Mon-Fri: 7am-8pm | Sat-Sun: 8am-9pm</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Brew & Bean Coffee Shop. All rights reserved. Made with ☕ and ❤️</p>
+    </footer>
+</body>
+</html>
